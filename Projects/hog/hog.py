@@ -39,7 +39,10 @@ def piggy_points(score):
     score:  The opponent's current score.
     """
     # BEGIN PROBLEM 2
-    "*** YOUR CODE HERE ***"
+    score_str = str(score ** 2)
+    min_digit = min(score_str)
+    min_digit = int(min_digit)
+    return 3 + min_digit
     # END PROBLEM 2
 
 
