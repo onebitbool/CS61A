@@ -139,9 +139,18 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
-    "*** YOUR CODE HERE ***"
-    # END PROBLEM 6
-    return score0, score1
+    player = 0
+    strategy = [strategy0, strategy1]
+    score = [score0, score1]
+    while score[player] < goal and score[next_player(player)] < goal:
+        player_score = score[player]
+        opponent_score = score[next_player(player)]
+        num_rolls = strategy[player](player_score, opponent_score)
+        turn_point = take_turn(num_rolls, opponent_score, dice, goal)
+        score[player] += turn_point
+        if not more_boar(score[player], opponent_score):
+            player = next_player(player)
+    return score[0], score[1]
 
 
 #######################
