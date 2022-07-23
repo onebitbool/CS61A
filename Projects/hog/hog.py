@@ -87,7 +87,16 @@ def more_boar(player_score, opponent_score):
     False
     """
     # BEGIN PROBLEM 4
-    "*** YOUR CODE HERE ***"
+    def num_to_str(num):
+        to_str = str(num)
+        if num < 10:
+            to_str = '0' + to_str
+        return to_str
+    player_score = num_to_str(player_score)
+    opponent_score = num_to_str(opponent_score)
+    if player_score[0] < opponent_score[0] and player_score[1] < opponent_score[1]:
+        return True
+    return False
     # END PROBLEM 4
 
 
