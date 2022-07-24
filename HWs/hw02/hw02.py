@@ -30,7 +30,13 @@ def product(n, term):
     >>> product(3, triple)    # 1*3 * 2*3 * 3*3
     162
     """
-    "*** YOUR CODE HERE ***"
+    assert n > 0
+    result = 1
+    counter = 1
+    while counter <= n:
+        result *= term(counter)
+        counter += 1
+    return result
 
 
 def square(x):
@@ -59,7 +65,12 @@ def accumulate(combiner, base, n, term):
     >>> accumulate(lambda x, y: (x + y) % 17, 19, 20, square)
     16
     """
-    "*** YOUR CODE HERE ***"
+    result = base
+    counter = 1
+    while counter <= n:
+        result = combiner(result, term(counter))
+        counter += 1
+    return result
 
 
 def summation_using_accumulate(n, term):
@@ -76,7 +87,7 @@ def summation_using_accumulate(n, term):
     ...       ['Recursion', 'For', 'While'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    return accumulate(add, 0, n, term)
 
 
 def product_using_accumulate(n, term):
@@ -92,7 +103,7 @@ def product_using_accumulate(n, term):
     ...       ['Recursion', 'For', 'While'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    return accumulate(mul, 1, n, term)
 
 
 def compose1(func1, func2):
