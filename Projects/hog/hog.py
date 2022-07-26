@@ -139,17 +139,18 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
-    player = 0
     strategy = [strategy0, strategy1]
     score = [score0, score1]
-    while score[player] < goal and score[next_player(player)] < goal:
-        player_score = score[player]
-        opponent_score = score[next_player(player)]
-        num_rolls = strategy[player](player_score, opponent_score)
+    while score[who] < goal and score[next_player(who)] < goal:
+        player_score = score[who]
+        opponent_score = score[next_player(who)]
+        num_rolls = strategy[who](player_score, opponent_score)
         turn_point = take_turn(num_rolls, opponent_score, dice, goal)
-        score[player] += turn_point
-        if not more_boar(score[player], opponent_score):
-            player = next_player(player)
+        score[who] += turn_point
+        # end this tern
+        say = say(score[0], score[1])
+        if not more_boar(score[who], opponent_score):
+            who = next_player(who)
     return score[0], score[1]
 
 
@@ -232,7 +233,16 @@ def announce_highest(who, last_score=0, running_high=0):
     """
     assert who == 0 or who == 1, 'The who argument should indicate a player.'
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
+
+    def say(score0, score1):
+        score = score0 if who == 0 else score1
+        gain = score - last_score
+        new_running_high = running_high
+        if gain > running_high:
+            new_running_high = gain
+            print('Player', who, 'has reached a new maximum point gain.', gain, 'point(s)!')
+        return announce_highest(who, score, new_running_high)
+    return say
     # END PROBLEM 7
 
 
