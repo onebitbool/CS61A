@@ -347,9 +347,9 @@ def run_experiments():
     print('Max scoring num rolls for six-sided dice:', six_sided_max)
     print('always_roll(6) win rate:', average_win_rate(always_roll(6)))
 
-    #print('always_roll(8) win rate:', average_win_rate(always_roll(8)))
-    #print('piggypoints_strategy win rate:', average_win_rate(piggypoints_strategy))
-    #print('more_boar_strategy win rate:', average_win_rate(more_boar_strategy))
+    print('always_roll(8) win rate:', average_win_rate(always_roll(8)))
+    print('piggypoints_strategy win rate:', average_win_rate(piggypoints_strategy))
+    print('more_boar_strategy win rate:', average_win_rate(more_boar_strategy))
     #print('final_strategy win rate:', average_win_rate(final_strategy))
     "*** You may add additional experiments as you wish ***"
 
@@ -371,7 +371,10 @@ def more_boar_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     Otherwise, it rolls NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Replace this statement
+    zero_roll_score = piggy_points(opponent_score)
+    if more_boar(score + zero_roll_score, opponent_score):
+        return 0
+    return piggypoints_strategy(score, opponent_score, cutoff, num_rolls)
     # END PROBLEM 11
 
 
