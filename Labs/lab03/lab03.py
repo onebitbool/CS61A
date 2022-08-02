@@ -73,6 +73,7 @@ def repeated(f, n):
     ...       ['For', 'While'])
     True
     """
+    """solution 1
     def repeater(x):
         def repeater_helper(times, base):
             if times == 0:
@@ -81,3 +82,10 @@ def repeated(f, n):
                 return repeater_helper(times - 1, f(base))
         return repeater_helper(n, x)
     return repeater
+    """
+    def repeater(func, times):
+        if times == 0:
+            return func
+        else:
+            return repeater(compose1(f, func), times - 1)
+    return repeater(lambda x: x, n)
